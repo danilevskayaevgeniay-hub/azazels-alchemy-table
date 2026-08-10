@@ -19,6 +19,8 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import ru.azazel.alchemytable.menu.AlchemyTableMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.level.Level;
 
 public class AlchemyTableBlockEntity
         extends BlockEntity
@@ -30,9 +32,41 @@ public class AlchemyTableBlockEntity
     public static final int POTIONSLOT3 = 2; // бутылочка -> результат
     public static final int POTIONSLOT4 = 3; // порошок ифрита
     public static final int CONTAINER_SIZE = 4;
+    public static final int MAX_BREW_PROGRESS = 80;
+    private int brewProgress = 0;
 
     private final NonNullList<ItemStack> items =
             NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
+    private final ContainerData data = new ContainerData(){
+            public int get(int index) {
+
+        return switch (index) {
+
+            case 0 -> brewProgress;
+
+            case 1 -> MAX_BREW_PROGRESS;
+
+            default -> 0;
+        };
+    }
+
+    @Override
+    public void set(
+            int index,
+            int value
+    ) {
+
+        if (index == 0) {
+            brewProgress = value;
+        }
+    }
+
+    @Override
+    public int getCount() {
+
+        return 2;
+    }
+    }
 
     public AlchemyTableBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.ALCHEMY_TABLE_BLOCK_ENTITY, pos, state);
@@ -105,9 +139,9 @@ public class AlchemyTableBlockEntity
         this.setChanged();
 
         // Смешивание выполняется только на сервере.
-        if (this.level != null && !this.level.isClientSide()) {
-            tryCraftPotion();
-        }
+        //if (this.level != null && !this.level.isClientSide()) {
+            //tryCraftPotion();
+        //}
     }
 
     @Override
@@ -129,6 +163,54 @@ public class AlchemyTableBlockEntity
             case POTIONSLOT4 -> stack.is(Items.BLAZE_POWDER);
             default -> false;
         };
+    }
+    private boolean canBrew() {
+
+    ItemStack potion1 =
+            this.items.get(
+                    POTIONSLOT1
+            );
+
+    ItemStack potion2 =
+            this.items.get(
+                    POTIONSLOT2
+            );
+
+    ItemStack bottle =
+            this.items.get(
+                    POTIONSLOT3
+            );
+
+    ItemStack fuel =
+            this.items.get(
+                    POTIONSLOT4
+            );
+
+
+    return potion1.is(Items.POTION)
+            && potion2.is(Items.POTION)
+            && bottle.is(Items.GLASS_BOTTLE)
+            && fuel.is(Items.BLAZE_POWDER);
+}
+    public static void tick(
+            Level level,
+            BlockPos pos,
+            BlockState state,
+            AlchemyTableBlockEntity blockEntity
+    ){
+            if (level.IsClientSide()) {
+                    return;
+            }
+    }
+    if (blockEntity.canBrew()) {
+        blockEntity.brewProgress++;
+        if  (
+                blockEntity.brewProgress
+                        >= MAX_BREW_PROGRESS
+        ) {
+                blockEntity.tryCraftPotion();
+                blockEntity.breProgress = 0;  
+        }
     }
 
     /**
