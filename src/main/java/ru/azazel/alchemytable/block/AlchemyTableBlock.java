@@ -24,6 +24,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import ru.azazel.alchemytable.block.entity.AlchemyTableBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import ru.azazel.alchemytable.block.entity.ModBlockEntities;
 
 public class AlchemyTableBlock extends Block implements EntityBlock {
 
@@ -51,6 +54,37 @@ public class AlchemyTableBlock extends Block implements EntityBlock {
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new AlchemyTableBlockEntity(pos, state);
     }
+    @Override
+public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+        Level level,
+        BlockState state,
+        BlockEntityType<T> type
+) {
+
+    // Этот ticker предназначен только
+    // для нашего алхимического стола.
+    if (type != ModBlockEntities.ALCHEMY_TABLE_BLOCK_ENTITY) {
+        return null;
+    }
+
+    return (
+            tickerLevel,
+            tickerPos,
+            tickerState,
+            blockEntity
+    ) -> {
+
+        if (blockEntity instanceof AlchemyTableBlockEntity table) {
+
+            AlchemyTableBlockEntity.tick(
+                    tickerLevel,
+                    tickerPos,
+                    tickerState,
+                    table
+            );
+        }
+    };
+}
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
