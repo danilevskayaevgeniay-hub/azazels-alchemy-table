@@ -211,6 +211,13 @@ public class AlchemyTableBlockEntity
                 blockEntity.tryCraftPotion();
                 blockEntity.breProgress = 0;  
         }
+        blockEntity.setChanged();
+    }
+    else {
+            if (blockEntity.brewProgress != 0) {
+                    blockEntity.brewProgress = 0;
+                    blockEntity.setChanged();
+            }
     }
 
     /**
@@ -293,6 +300,10 @@ public class AlchemyTableBlockEntity
     ) {
         super.saveAdditional(tag, registries);
         ContainerHelper.saveAllItems(tag, this.items, registries);
+        tag.putInt(
+                "BrewProgress",
+                this.brewProgress
+        );
     }
 
     @Override
