@@ -102,7 +102,7 @@ public class AlchemyTableBlockEntity
 
                 return 2;
             }
-                }
+                };
 
 
     // =========================================================
@@ -160,7 +160,7 @@ public class AlchemyTableBlockEntity
         return new AlchemyTableMenu(
                 containerId,
                 playerInventory,
-                this
+                this,
                 this.data
         );
     }
