@@ -20,7 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import ru.azazel.alchemytable.menu.AlchemyTableMenu;
-import net.minecraft.world.ContainerData;
+import net.minecraft.world.inventory.ContainerData;
 
 
 public class AlchemyTableBlockEntity
