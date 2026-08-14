@@ -49,8 +49,8 @@ public class AlchemyTableMenu extends AbstractContainerMenu {
         this(
                 containerId,
                 playerInventory,
-                new SimpleContainer(AlchemyTableBlockEntity.CONTAINER_SIZE)
-                new SimpleContainerData(2)
+                new SimpleContainer(AlchemyTableBlockEntity.CONTAINER_SIZE),
+                new SimpleContainerData(2);
         );
     }
 
