@@ -20,6 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import ru.azazel.alchemytable.menu.AlchemyTableMenu;
+import net.minecraft.world.ContainerData;
 
 
 public class AlchemyTableBlockEntity
@@ -66,6 +67,42 @@ public class AlchemyTableBlockEntity
      * уже находится в процессе приготовления.
      */
     private int brewProgress = 0;
+
+        private final ContainerData data =
+                new ContainerData() {
+                        @Override
+            public int get(int index) {
+
+                return switch (index) {
+
+                    // Текущий прогресс.
+                    case 0 -> brewProgress;
+
+                    // Максимальный прогресс.
+                    case 1 -> MAX_BREW_PROGRESS;
+
+                    default -> 0;
+                };
+            }
+
+            @Override
+            public void set(
+                    int index,
+                    int value
+            ) {
+
+                if (index == 0) {
+
+                    brewProgress = value;
+                }
+            }
+
+            @Override
+            public int getCount() {
+
+                return 2;
+            }
+                }
 
 
     // =========================================================
@@ -124,6 +161,7 @@ public class AlchemyTableBlockEntity
                 containerId,
                 playerInventory,
                 this
+                this.data
         );
     }
 
