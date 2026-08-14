@@ -141,8 +141,8 @@ public class AlchemyTableMenu extends AbstractContainerMenu {
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(Items.BLAZE_POWDER);
             }
-        );
-    }
+        )
+    };
 
     private void addPlayerInventory(Inventory playerInventory) {
         for (int row = 0; row < 3; row++) {
@@ -164,11 +164,11 @@ public class AlchemyTableMenu extends AbstractContainerMenu {
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int column = 0; column < 9; column++) {
             int x = HOTBAR_X + column * SLOT_DISTANCE;
-            this.addSlot(new Slot)(
+            this.addSlot(new Slot(
                     playerInventory,
                     column,
                     x,
-                    HOTBAR_Y
+                    HOTBAR_Y)
             );
         }
     }
