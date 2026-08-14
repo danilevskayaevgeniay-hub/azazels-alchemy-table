@@ -9,6 +9,8 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import ru.azazel.alchemytable.block.entity.AlchemyTableBlockEntity;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
 
 public class AlchemyTableMenu extends AbstractContainerMenu {
 
@@ -37,6 +39,7 @@ public class AlchemyTableMenu extends AbstractContainerMenu {
     private static final int SLOT_DISTANCE = 18;
 
     private final Container container;
+    private final ContainerData data;
 
     // Клиентский конструктор.
     public AlchemyTableMenu(
@@ -47,6 +50,7 @@ public class AlchemyTableMenu extends AbstractContainerMenu {
                 containerId,
                 playerInventory,
                 new SimpleContainer(AlchemyTableBlockEntity.CONTAINER_SIZE)
+                new SimpleContainerData(2)
         );
     }
 
@@ -54,7 +58,8 @@ public class AlchemyTableMenu extends AbstractContainerMenu {
     public AlchemyTableMenu(
             int containerId,
             Inventory playerInventory,
-            Container container
+            Container container,
+            ContainerData data
     ) {
         super(ModMenuTypes.ALCHEMY_TABLE_MENU, containerId);
 
@@ -64,6 +69,14 @@ public class AlchemyTableMenu extends AbstractContainerMenu {
         );
 
         this.container = container;
+        checkContainerDataCount(
+            data,
+            2
+        );
+        this.data = data;
+        this.addDataSlots(
+            data
+        );
         this.container.startOpen(playerInventory.player);
 
         addAlchemyTableSlots();
