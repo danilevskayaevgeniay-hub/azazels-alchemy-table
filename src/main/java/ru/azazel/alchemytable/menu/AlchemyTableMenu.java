@@ -132,7 +132,7 @@ public class AlchemyTableMenu extends AbstractContainerMenu {
             public int getMaxStackSize() {
                 return 1;
             }
-        });
+        );
     }
 
     private void addFuelSlot(int containerSlot, int x, int y) {
@@ -169,7 +169,7 @@ public class AlchemyTableMenu extends AbstractContainerMenu {
                     column,
                     x,
                     HOTBAR_Y
-            ));
+            );
         }
     }
 
