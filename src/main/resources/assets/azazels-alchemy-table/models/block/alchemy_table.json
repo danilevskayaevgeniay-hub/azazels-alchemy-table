@@ -1,10 +1,13 @@
 {
-	"format_version": "1.9.0",
-	"credit": "Made with Blockbench",
-	"texture_size": [80, 96],
-	"textures": {
-		"13": "stiched_texture.png"
-	},
+    "format_version": "1.9.0",
+    "credit": "Made with Blockbench",
+    "texture_size": [80, 96],
+
+    "textures": {
+        "13": "azazels-alchemy-table:block/stiched_texture",
+        "particle": "azazels-alchemy-table:block/stiched_texture"
+    },
+
 	"elements": [
 		{
 			"from": [0, 0, 0],
