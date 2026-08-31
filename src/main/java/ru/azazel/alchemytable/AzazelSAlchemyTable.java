@@ -18,7 +18,7 @@ public class AzazelSAlchemyTable implements ModInitializer {
     public void onInitialize() {
         ModBlocks.registerModBlocks();
         ModBlockEntities.registerModBlockEntities();
-        ModItem.registerModItems();
+        ModItems.registerModItems();
         ModMenuTypes.registerModMenuTypes();
 
         LOGGER.info("Azazel's Alchemy Table initialized");
