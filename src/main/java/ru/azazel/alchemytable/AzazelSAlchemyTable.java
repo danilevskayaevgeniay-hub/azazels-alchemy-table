@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import ru.azazel.alchemytable.block.ModBlocks;
 import ru.azazel.alchemytable.block.entity.ModBlockEntities;
 import ru.azazel.alchemytable.menu.ModMenuTypes;
+import ru.azazel.alchemytable.item.ModItem;
 
 public class AzazelSAlchemyTable implements ModInitializer {
 
@@ -17,6 +18,7 @@ public class AzazelSAlchemyTable implements ModInitializer {
     public void onInitialize() {
         ModBlocks.registerModBlocks();
         ModBlockEntities.registerModBlockEntities();
+        ModItem.registerModItem();
         ModMenuTypes.registerModMenuTypes();
 
         LOGGER.info("Azazel's Alchemy Table initialized");
