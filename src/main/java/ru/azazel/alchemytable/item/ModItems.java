@@ -23,7 +23,9 @@ public final class ModItems {
     public static void registerModItems() {
         ItemGroupEvents.modifyEntriesEvent(
                 CreativeModeTabs.TOOLS_AND_UTILITIES
-        ).register(entries -> entries.accept(MAGIC_WAND));
+        ).register(entries -> 
+                   entries.accept(MAGIC_WAND));
+                   entries.accept(LIGHT_MAGIC_WAND));
     }
 
     private ModItems() {
