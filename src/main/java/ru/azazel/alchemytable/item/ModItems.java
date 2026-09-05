@@ -24,7 +24,7 @@ public final class ModItems {
         ItemGroupEvents.modifyEntriesEvent(
                 CreativeModeTabs.TOOLS_AND_UTILITIES
         ).register(entries -> 
-                   entries.accept(MAGIC_WAND));
+                   entries.accept(MAGIC_WAND))
                    entries.accept(LIGHT_MAGIC_WAND));
     }
 
