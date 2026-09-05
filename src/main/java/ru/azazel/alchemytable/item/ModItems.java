@@ -14,6 +14,11 @@ public final class ModItems {
             AzazelSAlchemyTable.id("magic_wand"),
             new Item(new Item.Properties().stacksTo(1))
     );
+    public static final Item LIGHT_MAGIC_WAND = Registry.register(
+            BuiltInRegistries.ITEM,
+            AzazelSAlchemyTable.id("light_magic_wand"),
+            new ChargedMagicWandItem(new Item.Properties().stacksTo(1))
+    );
 
     public static void registerModItems() {
         ItemGroupEvents.modifyEntriesEvent(
